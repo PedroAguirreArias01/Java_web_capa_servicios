@@ -29,7 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(co.edu.uptc.sw2.proyectoAngular.ServicioEstudiante.class);
+        resources.add(co.edu.uptc.sw2.servicios.ServicioEstudiante.class);
     }
     
 }

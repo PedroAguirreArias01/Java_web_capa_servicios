@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uptc.sw2.proyectoAngular;
+package co.edu.uptc.sw2.servicios;
 
 import c.edu.uptc.sw2.persistencia.Almacenamiento;
+import co.edu.uptc.sw2.proyectoAngular.Estudiante;
 import java.util.ArrayList;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
@@ -22,8 +24,8 @@ public class ServicioEstudiante {
         return Almacenamiento.getInstance().getListEstudiantes();
     }
     
+    @POST
     public Estudiante guardarEstudiante(Estudiante estudiante){
-        estudiante.setCodigo("123456"+Almacenamiento.getInstance().getListEstudiantes().size()+1);
         Almacenamiento.getInstance().getListEstudiantes().add(estudiante);
         return estudiante;
     }

@@ -18,6 +18,8 @@ public class Estudiante {
     private String codigo;
     private String documento;
     private String fechaNacimiento;
+    private Carrera carrera;
+    private Municipio municipio;
 
     public Estudiante(String nombre, String apellidos, String codigo, String documento, String fechaNacimiento) {
         this.nombre = nombre;
@@ -96,5 +98,33 @@ public class Estudiante {
      */
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * @return the carrera
+     */
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    /**
+     * @param carrera the carrera to set
+     */
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
+
+    /**
+     * @return the municipio
+     */
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    /**
+     * @param municipio the municipio to set
+     */
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
     }
 }

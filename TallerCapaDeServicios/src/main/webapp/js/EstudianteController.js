@@ -1,12 +1,12 @@
 'use strict';
 
-var listaEstudiantes =
-        [{id: 1, nombre: 'Daniela', apellido: 'Torres', codigo: '201511109', documento: '1234567987', fechaNacimiento: '20/12/97', municipio: {id: 4, nombre: 'Umbita'}, carrera: {nombre: 'Ingenieria de Sistemas', facultad: {id: 1, nombre: 'Ingenieria'}}},
-            {id: 2, nombre: 'Pedro', apellido: 'Aguirre', codigo: '201320143', documento: '1234567987', fechaNacimiento: '23/12/95', municipio: {id: 5, nombre: 'Ramiriqui'}, carrera: {nombre: 'Ingenieria de Sistemas', facultad: {id: 1, nombre: 'Ingenieria'}}}];
+var listaEstudiantes;
+/**[{id: 1, nombre: 'Daniela', apellido: 'Torres', codigo: '201511109', documento: '1234567987', fechaNacimiento: '20/12/97', municipio: {id: 4, nombre: 'Umbita'}, carrera: {nombre: 'Ingenieria de Sistemas', facultad: {id: 1, nombre: 'Ingenieria'}}},
+ {id: 2, nombre: 'Pedro', apellido: 'Aguirre', codigo: '201320143', documento: '1234567987', fechaNacimiento: '23/12/95', municipio: {id: 5, nombre: 'Ramiriqui'}, carrera: {nombre: 'Ingenieria de Sistemas', facultad: {id: 1, nombre: 'Ingenieria'}}}];*/
 
 module.controller('EstudianteCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
         //listar
-        $scope.lista = listaEstudiantes;
+        $scope.lista = null;
         $scope.id = 2;
         $scope.municipio = listaMunicipios;
         $scope.carrera = listaCarreras;
@@ -19,14 +19,28 @@ module.controller('EstudianteCtrl', ['$scope', '$filter', '$http', function ($sc
             $scope.datosFormulario = {};
         };
 
+
+        $scope.getEstudiantes = function () {
+            $http.get("./webresources/ServicioEstudiante", {})
+                    .then(function (response) {
+                        $scope.lista = response.data;
+                        $scope.datosFormulario = {};
+                    }, function () {
+                        alert("Error al consultar el estudiante");
+                    });
+        };
+
         $scope.guardar = function () {
             $scope.errores = {};
             var error = false;
             if (error)
                 return;
             if (!$scope.datosFormulario.id) {
-                $scope.datosFormulario.id = $scope.id++;
-                $scope.lista.push($scope.datosFormulario);
+                $http.post("./webresources/ServicioEstudiante", $scope.nuevoEstudiante)
+                        .then(function (response) {
+                            $scope.getEstudiantes();
+                        });
+                $http;
             }
             $scope.panelEditar = false;
         };
